@@ -8,6 +8,8 @@ class Product extends Model
 {
     protected $fillable = ['name', 'slug', 'price', 'description'];
 
+    public function getRouteKeyName() { return 'slug'; }
+    
     public function addCategory($category)
     {
     	return $this->categories()->attach($category->id);

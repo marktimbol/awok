@@ -22,4 +22,21 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         return $app;
     }
+
+    public function newProduct($options=[])
+    {
+        return factory(App\Product::class)->create($options);
+    }
+
+    public function newCategory($options=[])
+    {
+        return factory(App\Category::class)->create($options);
+    }
+
+    public function addToCart($product)
+    {
+        $this->call('POST', '/cart' , [
+            'product_id'    => $product->id
+        ]);        
+    }
 }

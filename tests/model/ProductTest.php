@@ -26,7 +26,7 @@ class ProductTest extends TestCase
     	$product = factory(App\Product::class)->create();
     	$product->addCategory($category);
 
-    	$this->visit('/categories/'.$category->id.'/products/'.$product->id)
+    	$this->visit('/categories/'.$category->slug.'/products/'.$product->slug)
     		->see($product->name);
     }
 }
