@@ -11,10 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-	flash()->success('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod');
+Route::post(
+    'stripe/webhook',
+    '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook'
+);
+
+Route::get('/', ['as' => 'home', function () {
     return view('welcome');
-});
+}]);
 
 Route::auth();
 Route::get('/home', 'HomeController@index');
@@ -22,7 +26,5 @@ Route::get('/home', 'HomeController@index');
 Route::resource('categories.products', 'ProductsController');
 Route::resource('cart', 'CartController');
 Route::resource('checkout', 'BillingsController', [
-	'only' => [
-		'index', 'store'
-	]
+	'only' => ['index', 'store']
 ]);

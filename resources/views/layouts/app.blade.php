@@ -55,8 +55,7 @@
 
     @yield('content')
 
-    @yield('footer_scripts')
-    
     <script src="{{ elixir('js/app.js') }}"></script>
+    @yield('footer_scripts')
 </body>
 </html>
