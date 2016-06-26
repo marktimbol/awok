@@ -1,0 +1,13 @@
+body {
+	color: #333;
+}
+
+.subtitle-center {
+	text-align: center;
+	margin: 30px 0;
+	text-transform: uppercase;
+}
+
+@import 'components/FiveColumns';
+@import 'components/Card';
+@import 'components/Item';

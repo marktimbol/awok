@@ -27,7 +27,7 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Product::class, function (Faker\Generator $faker) {
+$factory->define(App\Item::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->sentence,
         'slug' => $faker->slug,

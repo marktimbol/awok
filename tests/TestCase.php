@@ -23,20 +23,29 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $app;
     }
 
-    public function newProduct($options=[])
+    public function createItem($options=[])
     {
-        return factory(App\Product::class)->create($options);
+        return factory(App\Item::class)->create($options);
     }
 
-    public function newCategory($options=[])
+    public function createCategory($options=[])
     {
         return factory(App\Category::class)->create($options);
     }
 
-    public function addToCart($product)
+    public function addToCart($item, $quantity=1)
     {
-        $this->call('POST', '/cart' , [
-            'product_id'    => $product->id
-        ]);        
+        // $this->call('POST', '/cart' , [
+        //     'product_id'    => $product->id
+        // ]);   
+        \Cart::add([
+            'id'    => $item->id,
+            'name'  => $item->name,
+            'qty'   => $quantity,
+            'price' => $item->price,
+            'options' => [
+                'item'   => $item
+            ]
+        ]);
     }
 }

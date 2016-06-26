@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Product;
+use App\Item;
 use Awok\ShoppingCart;
 use Illuminate\Http\Request;
 
@@ -30,17 +30,20 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-    	$product = Product::findOrFail($request->product_id);
+    	$product = Item::findOrFail($request->product_id);
 
-    	return $this->cart->add([
+    	$this->cart->add([
     		'id'	=> $product->id,
     		'name'	=> $product->name,
-    		'qty'	=> 1,
+    		'qty'	=> $request->quantity,
     		'price'	=> $product->price,
     		'options' => [
     			'product'	=> $product
     		]
     	]);
+
+        flash()->success('Item was added into your cart.');
+        return redirect()->back();
     }
 
     public function update(Request $request, $rowID)

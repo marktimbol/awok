@@ -30,7 +30,7 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/cart') }}">Cart</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -53,9 +53,13 @@
         </div>
     </nav>
 
-    @yield('content')
+    <div class="container">
+        @yield('content')
+    </div>
 
     <script src="{{ elixir('js/app.js') }}"></script>
+    @include('flash')
+    
     @yield('footer_scripts')
 </body>
 </html>

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductCategoriesPivotTable extends Migration
+class CreateItemCategoriesPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class CreateProductCategoriesPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_categories', function (Blueprint $table) {
+        Schema::create('item_categories', function (Blueprint $table) {
             $table->integer('category_id')->unsigned();
-            $table->integer('product_id')->unsigned();
+            $table->integer('item_id')->unsigned();
         });
     }
 
@@ -25,6 +25,6 @@ class CreateProductCategoriesPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('product_categories');
+        Schema::drop('item_categories');
     }
 }

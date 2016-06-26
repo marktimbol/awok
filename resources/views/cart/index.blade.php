@@ -21,20 +21,25 @@
                     <tr>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->price }}</td>
-                        <td>
+                        <td width="150">
                             <form action="{{ route('cart.update', $item->rowID) }}">
                                 {!! csrf_field() !!}
                                 {!! method_field('PUT') !!}
-                                <div class="form-control">
-                                    <input type="text" name="quantity" value="{{ $item->qty }}" class="form-control" />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <a href="#" class="btn btn-default">-</a>
+                                        </div>
+                                        <input type="text" name="quantity" value="{{ $item->qty }}" size="3" class="form-control" />
+                                        <div class="input-group-btn">
+                                            <a href="#" class="btn btn-default">+</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-control">
-                                    <button type="submit" class="btn btn-default">Update</button>
-                                </div>  
                             </form>         
                         <td>{{ $item->subtotal }}</td>
                         <td>
-                            <form action="{{ route('cart.destroy', $item->rowId) }}">
+                            <form method="POST" action="{{ route('cart.destroy', $item->rowId) }}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <div class="form-group">

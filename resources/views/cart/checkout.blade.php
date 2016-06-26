@@ -8,10 +8,8 @@
             <h2>Checkout</h2>
         </div>
         <div class="col-md-9">
-            <form method="POST" id="paymentForm">
-                <div class="payment-errors">
-                    
-                </div>
+            <form method="POST" id="billingForm">
+                <div class="payment-errors"></div>
                 {!! csrf_field() !!}
                 <h3>Personal Information</h3>
                 <hr />
@@ -67,7 +65,7 @@
                 <hr />
                 <div class="form-group">
                     <label>Name on Card</label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" data-stripe="name" />
                 </div>
 
                 <div class="form-group">
@@ -114,44 +112,42 @@
     <script type="text/javascript">
         Stripe.setPublishableKey('pk_test_FdWDhqgmFddybwXdk6GOL1fH');
         $(function() {
-            var $form = $('#paymentForm');
-
+            var $form = $('#billingForm');
+            console.log('hi');
             $form.submit(function(event) {
                 // Disable the submit button to prevent repeated clicks:
                 $form.find('.submit').prop('disabled', true);
-
                 // Request a token from Stripe:
                 Stripe.card.createToken($form, stripeResponseHandler);
-
                 // Prevent the form from being submitted:
                 return false;
             });
 
             function stripeResponseHandler(status, response) {
                 // Grab the form:
-                var $form = $('#paymentForm');
+                var $form = $('#billingForm');
 
-                if (response.error) { // Problem!
-
+                if (response.error) {
                     // Show the errors on the form:
                     $form.find('.payment-errors').text(response.error.message);
                     $form.find('.submit').prop('disabled', false); // Re-enable submission
-
                 } else { // Token was created!
-
+                    console.log(response);
                     // Get the token ID:
                     var token = response.id;
-
                     // Insert the token ID into the form so it gets submitted to the server:
                     $form.append($('<input type="hidden" name="stripeToken">').val(token));
-
+                    // $form.append($('<input type="hidden" name="cardName" />').val(response.card.name));
+                    // $form.append($('<input type="hidden" name="cardBrand" />').val(response.card.brand));
+                    // $form.append($('<input type="hidden" name="cardLastFour" />').val(response.card.last4));
+                    // $form.append($('<input type="hidden" name="cardExpiryMonth" />').val(response.card.exp_month));
+                    // $form.append($('<input type="hidden" name="cardExpiryYear" />').val(response.card.exp_year));
                     // Submit the form:
                     $form.get(0).submit();
                 }
             };
         });
     </script>    
-
 @endsection
 
 
