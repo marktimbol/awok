@@ -9,7 +9,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Product Name</th>
+                        <th>Item</th>
                         <th>Price</th>
                         <th>Qty.</th>
                         <th>Subtotal</th>
@@ -19,9 +19,13 @@
                 <tbody>
                     @foreach( $items as $item )
                     <tr>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ $item->price }}</td>
-                        <td width="150">
+                        <td>
+                            <a href="{{ route('items.show', $item->options->item->slug) }}">
+                                {{ $item->name }}
+                            </a>
+                        </td>
+                        <td>AED {{ $item->price }}</td>
+                        <td width="120">
                             <form action="{{ route('cart.update', $item->rowID) }}">
                                 {!! csrf_field() !!}
                                 {!! method_field('PUT') !!}
@@ -37,7 +41,7 @@
                                     </div>
                                 </div>
                             </form>         
-                        <td>{{ $item->subtotal }}</td>
+                        <td>AED {{ $item->subtotal }}</td>
                         <td>
                             <form method="POST" action="{{ route('cart.destroy', $item->rowId) }}">
                                 {!! csrf_field() !!}

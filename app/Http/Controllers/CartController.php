@@ -30,15 +30,15 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-    	$product = Item::findOrFail($request->product_id);
+    	$item = Item::findOrFail($request->item_id);
 
     	$this->cart->add([
-    		'id'	=> $product->id,
-    		'name'	=> $product->name,
+    		'id'	=> $item->id,
+    		'name'	=> $item->name,
     		'qty'	=> $request->quantity,
-    		'price'	=> $product->price,
+    		'price'	=> $item->price,
     		'options' => [
-    			'product'	=> $product
+    			'item'	=> $item
     		]
     	]);
 

@@ -1,4 +1,4 @@
-@if (session()->has('flash_notification'))
+@if (session()->has('flash_notification.message'))
 	<script>
 		swal({
 			title: 'Awok.com',  

@@ -28,7 +28,7 @@ class AddStripeSpecificColumnsInUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn(['stripe_id', 'card_brand', 'card_last_four', 'trial_ends_at']);
         });
     }
 }

@@ -32,7 +32,7 @@
                 <hr />
             	<form method="POST" class="form-inline" action="{{ route('cart.store') }}">
             		{!! csrf_field() !!}
-            		<input type="hidden" name="product_id" value="{{ $item->id }}" />
+            		<input type="hidden" name="item_id" value="{{ $item->id }}" />
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-btn">
